@@ -7,7 +7,7 @@ function killScript() {
     try {
         let pid = execSync(`pgrep node`);
         pid = parseInt(pid.toString().split('\n')[1]);
-        execSync(`kill -9 ${pid}`);
+        execSync(`kill ${pid}`)
     } catch (error) {
         killScript();
     }
