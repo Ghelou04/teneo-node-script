@@ -62,7 +62,7 @@ class Server {
                     }
                 }
                 else {
-                    loginInfo = process.env.TOKEN
+                  let loginInfo = process.env.TOKEN
                     connectWebSocket(loginInfo,{
                         silentPing: true
                     });
