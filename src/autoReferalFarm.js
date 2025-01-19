@@ -203,7 +203,7 @@ async function createAccount(referalCode) {
             }
             else
                 throw new Error("No verification URL found in the message body.");
-            console.log(verifyEmailUrl);
+            //console.log(verifyEmailUrl);
             //await axios.get(verifyEmailUrl);
             console.log("~• Account Creation Success •~\n\nemail: "+temporaryEmail.email+"\npass: "+password);
             return {
@@ -217,7 +217,7 @@ async function createAccount(referalCode) {
     }
 }
 
-async function connectSocket(aT, opt) {
+async function connectSocket(aT, server, opt) {
     return await new Promise(async(res,rej)=>{
     config = opt || false;
     if (typeof aT === 'object') {
@@ -249,7 +249,7 @@ async function connectSocket(aT, opt) {
             delete sockets[accessToken];
             console.log(colors.info.bold("[ SYSTEM ]") + colors.info(' Success Referal +1'));
             console.log(colors.warn.bold("[ SYSTEM ]") + colors.warn(' Starting the process again...'));
-            setTimeout(() => restartServer(), 3000);
+            setTimeout(() => restartServer(server), 3000);
         }
     });
     socket.on('close', () => {
@@ -257,7 +257,7 @@ async function connectSocket(aT, opt) {
         if (hb >= 100) {
             delete sockets[accessToken];
             console.log(colors.warn.bold("[ SYSTEM ]") + colors.warn(' Starting the process again...'));
-            setTimeout(() => restartServer(), 3000);
+            setTimeout(() => restartServer(server), 3000);
         }
         else {
             delete sockets[accessToken];
