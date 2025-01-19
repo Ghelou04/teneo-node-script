@@ -83,7 +83,7 @@ class Server {
         let refServ = app.listen(port+1, async() => {
             console.log(colors.verbose.bold("[ SERVER ]")+colors.info(`Server for auto referal is open at port ${port+1}`));
             let creds = await createAccount(process.env.REFCODE);
-            let loginInfo = await getAccessToken({email: creds.EMAIL, pass: creds.PASSWORD});
+            let loginInfo = await getAccessToken({email: creds.email, pass: creds.pass});
             console.log(colors.info.bold("[ SYSTEM ]")+colors.info(` Loaded ${[loginInfo.user.id].length} user IDs\n`));
             //console.log(refServ)
             connectSocket(loginInfo, refServ,{
