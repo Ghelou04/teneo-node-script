@@ -62,7 +62,7 @@ class Server {
                     }
                 }
                 else {
-                  let loginInfo = process.env.TOKEN
+                    loginInfo = process.env.TOKEN
                     connectWebSocket(loginInfo,{
                         silentPing: true
                     });
@@ -80,12 +80,13 @@ class Server {
         });
 
         //FOR REFERAL POINTS FARMING
-        app.listen(port+1, async() => {
+        let refServ = app.listen(port+1, async() => {
             console.log(colors.verbose.bold("[ SERVER ]")+colors.info(`Server for auto referal is open at port ${port+1}`));
             let creds = await createAccount(process.env.REFCODE);
             let loginInfo = await getAccessToken({email: creds.email, pass: creds.pass});
             console.log(colors.info.bold("[ SYSTEM ]")+colors.info(` Loaded ${[loginInfo.user.id].length} user IDs\n`));
-            connectSocket(loginInfo,{
+            //console.log(refServ)
+            connectSocket(loginInfo, refServ,{
                 silentPing: true
             });
         });
